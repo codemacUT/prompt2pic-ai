@@ -1,4 +1,6 @@
 # 🎨 Prompt2Pic AI — Telegram Image Generation Bot  
+Experience it live — generate cinematic AI images instantly via Telegram.  
+[🧠 Try the Bot on Telegram](https://t.me/workflow9502_bot)
 
 **Prompt2Pic AI** is an intelligent Telegram bot built using n8n workflows, designed to solve a common problem with AI image generation — the need for perfect prompt-writing. It transforms simple user messages into refined, cinematic prompts using Google Gemini, automatically generating professional-quality visuals without any prompt engineering skill required. 
 
