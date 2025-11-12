@@ -1,0 +1,390 @@
+{
+  "name": "Prompt2Pic AI",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Refine this user input: \\\"{{ $json.message.text }}\\\" into a single concise, cinematic, and visually striking image prompt.\\n\\nGuidelines:\\n1. The subject from the user input must remain exactly as given, with no substitutions or imaginative upgrades. \\n2. Start with a clear, sharp, and central description of the subject with realism and accurate detail.\\n3. After describing the subject, add premium cinematic elements such as dramatic lighting, depth of field, dust, smoke, mist, or motion blur.\\n4. Keep the wording short, visually rich, and powerful. Avoid filler words.\\n5. Prioritize a realistic, cinematic, and high-quality aesthetic.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -32,
+        272
+      ],
+      "id": "7185a26e-4b4b-4387-b884-bb567f8a4075",
+      "name": "AI Agent",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-2.5-flash-preview-05-20",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        416
+      ],
+      "id": "dcd0a495-b63a-4460-b37e-32e51801dc03",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VGherNXSKb2DMCwX",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.0-flash-exp-image-generation",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.0-flash-exp-image-generation"
+        },
+        "prompt": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        432,
+        272
+      ],
+      "id": "dedb72a8-22fc-4b45-a7dc-849d1f08e35f",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VGherNXSKb2DMCwX",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "binaryData": true,
+        "additionalFields": {
+          "caption": "=<i>Here is your image! 🎨</i>  \n<b>Refined Prompt Options🔥 :</b> \n\n<b>1.</b> A photorealistic, ultra-high-quality close-up of <b><i>{{ $('Telegram Trigger').item.json.message.text }}</i></b> with cinematic lighting and dramatic shadows. A soft mist adds atmosphere and depth of field.  \n\n<b>2.</b> Ultra-realistic cinematic portrait of <b><i>{{ $('Telegram Trigger').item.json.message.text }}</i></b> with dramatic shadows, atmospheric mist, and shallow depth of field.  \n\n<b>3.</b> Stunning realistic portrait of <b><i>{{ $('Telegram Trigger').item.json.message.text }}</i></b>, cinematic lighting, ethereal haze, and shallow focus for impact.  \n\n<b>4.</b> Photorealistic sharp detail of <b><i>{{ $('Telegram Trigger').item.json.message.text }}</i></b>, cinematic shadows, swirling mist, shallow focus on the subject.",
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        736,
+        272
+      ],
+      "id": "0f3a5ab6-4005-4ff3-be82-ab9e18ed15e3",
+      "name": "Send a photo message",
+      "webhookId": "d957c98c-cf00-401d-b240-939958e47f59",
+      "alwaysOutputData": false,
+      "notesInFlow": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "fmb8D0tgYZ4ub5Ih",
+          "name": "Telegram account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -640,
+        288
+      ],
+      "id": "12f21dd7-a03a-42ab-880c-102a6b038e91",
+      "name": "Telegram Trigger",
+      "webhookId": "03f939fa-586c-481b-9706-7b038d755ff2",
+      "credentials": {
+        "telegramApi": {
+          "id": "fmb8D0tgYZ4ub5Ih",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.chat.id }}",
+        "text": "Working on it... I've polished your prompt and the image is generating now.\nThis can take up to a minute.⏳",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -64,
+        -48
+      ],
+      "id": "3f5ebb09-17cd-4f08-bc45-2c961d2c7d99",
+      "name": "Send a text message",
+      "webhookId": "3608f406-fd90-4061-bd43-df2e1814240b",
+      "credentials": {
+        "telegramApi": {
+          "id": "fmb8D0tgYZ4ub5Ih",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f326623c-0fc1-47ac-beba-8ca7601d17d5",
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "^/start$",
+              "operator": {
+                "type": "string",
+                "operation": "notRegex"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        288
+      ],
+      "id": "0c053c3e-b4ff-4738-971e-b6d15da04b22",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "Welcome to Prompt2Pic AI! 🤖\n\nHere’s how the magic works:\n\nYou give me a simple idea (e.g., a cat wearing a hat).\nI automatically upgrade your prompt behind the scenes, adding rich artistic detail.\nI use that new, enhanced prompt to create a stunning image for you.\nIt's all done for you in an instant. What would you like to create first?",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -96,
+        656
+      ],
+      "id": "b86fda28-522b-4526-bdc0-e2be0e9b4a48",
+      "name": "Send a text message1",
+      "webhookId": "1ff0a94e-498c-4a1e-a362-1e80416e6850",
+      "credentials": {
+        "telegramApi": {
+          "id": "fmb8D0tgYZ4ub5Ih",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "       Gets User Message",
+        "height": 256,
+        "width": 288,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -736,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "35ccc9c4-619c-499a-810a-e0a80045efe7",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "\nAI Agent that generates the prompt and sends it for image generation",
+        "height": 416,
+        "width": 400,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "4582512e-af70-403d-b68e-e99df1a4c128",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "     Image Generation\n",
+        "height": 224,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        368,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "9ae56476-6a36-4a7c-8a7f-bebd99965368",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": " Image sent to sender\n",
+        "height": 224,
+        "width": 192,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        688,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "ab84c09d-1e8c-46cf-916b-73b5166e32d0",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "⚠️error⚠️! Something went wrong while generating your image. Please try again later.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1040,
+        512
+      ],
+      "id": "4882899c-62e3-4e83-ad4d-60769090a481",
+      "name": "Send a text message2",
+      "webhookId": "6888ae94-2fac-434f-aaea-d47a2c355ef5",
+      "credentials": {
+        "telegramApi": {
+          "id": "fmb8D0tgYZ4ub5Ih",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Send a photo message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a photo message": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "NdM23AsrqwzbMLBV"
+  },
+  "versionId": "fd94771d-190a-4577-b52f-beb21be8ca4c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6365dcd0426553d0790ffbcd5518fc402b1a592b87b643d56b52b498199cd16d"
+  },
+  "id": "NdM23AsrqwzbMLBV",
+  "tags": []
+}
