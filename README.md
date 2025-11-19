@@ -1,3 +1,5 @@
+## 🎨 Prompt2Pic AI — Telegram Image Generation Bot
+
 Generate cinematic AI images instantly through Telegram — no complex prompt-writing needed.
 [🧠 Try the Bot on Telegram](https://t.me/workflow9502_bot) (May be temporarily unavailable) 
 
