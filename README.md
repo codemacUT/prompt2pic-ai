@@ -174,7 +174,9 @@ prompt2pic-ai/
 
 ## 🖼️ Preview  
 
-![Prompt2Pic AI Bot Preview](https://github.com/user-attachments/assets/829d9723-27a9-4b7f-9700-0bd99077d591)
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/829d9723-27a9-4b7f-9700-0bd99077d591" width="70%" />
+</div>
 
 ![Prompt2Pic AI Workflow Preview](workflow-preview.png)
 
