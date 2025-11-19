@@ -28,8 +28,9 @@ Even if the live bot is temporarily unavailable, you can still view the complete
 https://drive.google.com/drive/folders/1aAvdkg4ehFGKOxvMxOAc1OmR94np9dQt?usp=drive_link
 
 This demo includes:
-	•	The user → bot interaction
-	•	The full n8n workflow execution behind the scenes
+
+- The user → bot interaction  
+- The full n8n workflow execution behind the scenes  
    
 ---
 
