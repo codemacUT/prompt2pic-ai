@@ -1,26 +1,27 @@
 ## 🎨 Prompt2Pic AI — Telegram Image Generation Bot
 
 Generate cinematic AI images instantly through Telegram — no complex prompt-writing needed.
-[🧠 Try the Bot on Telegram](https://t.me/workflow9502_bot) (May be temporarily unavailable) 
+🧠 Try the Bot on Telegram￼ (May be temporarily unavailable)
 
-**Prompt2Pic AI** is an intelligent Telegram bot built using n8n workflows, designed to solve a common problem with AI image generation — the need for perfect prompt-writing. It transforms simple user messages into refined, cinematic prompts using Google Gemini, automatically generating professional-quality visuals without any prompt engineering skill required. 
+Prompt2Pic AI is an intelligent Telegram bot built using n8n workflows that removes the need for perfect prompt-writing.
+It transforms simple user messages into refined, cinematic prompts using Google Gemini and generates high-quality images automatically — all through a single chat message.
 
-It leverages **Google Gemini (PaLM) APIs** for natural language refinement and image generation, while maintaining a fully automated Telegram-based interface.
-
----
-
-🚦 Current Status (Important)
-
-The Gemini image generation API is currently unstable.
-As a result, the live bot may show:
-
-⚠️ “The service is currently under heavy load. Please try again in a moment.”
-
-The bot’s architecture and workflows remain fully functional — this limitation is external.
+Powered by Google Gemini (PaLM) APIs, it performs natural-language prompt refinement and image generation while maintaining a fully automated Telegram-based interface.
 
 ⸻
 
-🎥 Full Demo Video
+## 🚦 Current Status
+
+The Gemini image generation API is currently unstable.
+This may cause the live bot to respond with:
+
+⚠️ “The service is currently under heavy load. Please try again in a moment.”
+
+All internal workflows and automation logic remain fully functional — the limitation is entirely on the external API.
+
+⸻
+
+## 🎥 Full Demo Video
 
 Even if the live bot is temporarily unavailable, you can still view the complete functionality here:
 
@@ -173,7 +174,9 @@ prompt2pic-ai/
 
 ## 🖼️ Preview  
 
-![Prompt2Pic AI Workflow Preview](workflow-preview.png)  
+![Prompt2Pic AI Bot Preview](https://github.com/user-attachments/assets/829d9723-27a9-4b7f-9700-0bd99077d591)
+
+![Prompt2Pic AI Workflow Preview](workflow-preview.png)
 
 ---
 
