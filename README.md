@@ -54,6 +54,8 @@ Users simply send a short message (like *“a robot drinking tea”*), and the b
 - **Smart user feedback** — sends refined prompt suggestions with every image  
 - **Error handling & resilience** — gracefully manages request overloads or internal failures  
 - **Zero-code deployment** — powered entirely by n8n visual logic  
+- **Dockerfile + render.yaml for stable internal builds on Render (no image pull failures)**  
+- **Supabase-backed Postgres database for persistent workflow/credential storage**  
 
 ---
 
@@ -78,7 +80,8 @@ Each step is modular — allowing for easy updates, retries, or integrations.
 - **n8n** — workflow automation & orchestration  
 - **Telegram Bot API** — message reception & image delivery  
 - **Google Gemini API** — LLM-powered text refinement and image generation  
-- **Render Cloud** — deployment and execution environment  
+- **Supabase Postgres** — persistent database  
+- **Render Cloud** — deployment and execution environment (Dockerfile-based build) 
 
 ---
 
@@ -108,6 +111,8 @@ This ensures high reliability, even during external API downtime or rate limitin
 prompt2pic-ai/
 │
 ├── workflow.json          # n8n exported workflow (safe, sanitized)
+├── Dockerfile             # NEW: internal Render build for n8n
+├── render.yaml            # NEW: Render blueprint for deployment
 ├── logo.png               # Bot logo or branding asset
 ├── README.md              # Documentation (this file)
 └── workflow-preview.png  # Screenshot of workflow nodes in n8n
@@ -124,7 +129,28 @@ prompt2pic-ai/
 - Add your **Telegram Bot Token** in n8n Credentials  
 - Add your **Google Gemini (PaLM) API key** in n8n Credentials  
 
-### 3. Activate Workflow  
+### 3. Configure Supabase Database  
+Add the following environment variables in Render:
+DB_TYPE=postgresdb
+DB_POSTGRESDB_HOST=
+DB_POSTGRESDB_PORT=5432
+DB_POSTGRESDB_DATABASE=
+DB_POSTGRESDB_USER=
+DB_POSTGRESDB_PASSWORD=
+DB_POSTGRESDB_SCHEMA=public
+
+### 4. Deployment Using Dockerfile (Important Update)
+
+Prompt2Pic AI now uses a **Dockerfile + render.yaml** for deployment on Render.  
+Render builds everything internally — eliminating issues such as:
+
+- “Failed to pull image”  
+- Docker Hub rate limits  
+- Free-tier restarts breaking the service  
+
+This ensures **stable, consistent uptime**.
+
+### 5. Activate Workflow  
 - Enable the **Telegram Trigger node**  
 - Deploy the workflow — your bot goes live instantly  
 
@@ -149,18 +175,18 @@ prompt2pic-ai/
 
 - Error messages are **intentionally abstracted** to keep user trust.  
 - The refined prompts are **educational**, helping users learn effective prompt-making.  
-- The system uses **stateless message flow** — no persistent database, ensuring simplicity and speed.  
-- Each workflow node includes **onError: continue**, allowing partial completion even during minor API failures.  
+- The system uses **stateless message flow**, with Supabase used only for workflow + credential persistence.  
+- Each workflow node includes **onError: continue**, allowing graceful fallback behavior.   
 
 ---
 
 ## 📈 Future Improvements  
 
-- [ ] Add user-based request limits (e.g., 3–5 free prompts per day)  
-- [ ] Integrate basic analytics (log prompts and timestamps)  
-- [ ] Build a web dashboard for prompt history  
-- [ ] Add multi-language support  
-- [ ] Enable parallel image generation for batch requests  
+- Add user-based request limits (e.g., 3–5 free prompts per day)  
+- Integrate basic analytics (log prompts and timestamps)  
+- Build a web dashboard for prompt history  
+- Add multi-language support  
+- Enable parallel image generation for batch requests  
 
 ---
 
