@@ -1,4 +1,4 @@
-FROM n8nio/n8n:1.85.1
+FROM n8nio/n8n:latest
 
 # Fix permissions warning (optional but recommended)
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
