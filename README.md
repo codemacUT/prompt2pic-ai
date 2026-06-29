@@ -8,7 +8,7 @@ It transforms simple user messages into refined, cinematic prompts using Google 
 
 Powered by Google Gemini (PaLM) APIs, it performs natural-language prompt refinement and image generation while maintaining a fully automated Telegram-based interface.
 
-⸻
+---
 
 ## 🚦 Current Status
 
@@ -19,7 +19,7 @@ This may cause the live bot to respond with:
 
 All internal workflows and automation logic remain fully functional — the limitation is entirely on the external API.
 
-⸻
+---
 
 ## 🖼️ Preview  
 
@@ -29,7 +29,7 @@ All internal workflows and automation logic remain fully functional — the limi
 
 ![Prompt2Pic AI Workflow Preview](workflow-preview.png)
 
-⸻
+---
 
 ## 🎥 Full Demo Video
 
