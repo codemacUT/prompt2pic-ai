@@ -21,6 +21,16 @@ All internal workflows and automation logic remain fully functional — the limi
 
 ⸻
 
+## 🖼️ Preview  
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/829d9723-27a9-4b7f-9700-0bd99077d591" width="70%" />
+</div>
+
+![Prompt2Pic AI Workflow Preview](workflow-preview.png)
+
+⸻
+
 ## 🎥 Full Demo Video
 
 Even if the live bot is temporarily unavailable, you can still view the complete functionality here:
@@ -195,16 +205,6 @@ This ensures **stable, consistent uptime**.
 **Utkarsh Tiwari**  
 > B.Tech CSE | Developer & Automation Enthusiast   
 - 🌐 GitHub: [github.com/codemacUT](https://github.com/codemacUT)  
-
----
-
-## 🖼️ Preview  
-
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/829d9723-27a9-4b7f-9700-0bd99077d591" width="70%" />
-</div>
-
-![Prompt2Pic AI Workflow Preview](workflow-preview.png)
 
 ---
 
