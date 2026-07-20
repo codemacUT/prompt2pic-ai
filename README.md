@@ -29,18 +29,31 @@ All internal workflows and automation logic remain fully functional — the limi
 
 ---
 
-## 🎥 Full Demo Video
+## 🎥 Full Demo
 
-Even if the live bot is temporarily unavailable, you can still view the complete functionality here:
+Even if the live bot is temporarily unavailable, you can still explore the complete workflow below.
 
-👉 Watch the full demo of Prompt2Pic AI in action
-https://drive.google.com/drive/folders/1aAvdkg4ehFGKOxvMxOAc1OmR94np9dQt?usp=drive_link
+### 🤖 Prompt2Pic Bot
 
-This demo includes:
+https://github.com/user-attachments/assets/4683cb43-1cf5-48b5-8c23-966d18ea460b
 
-- The user → bot interaction  
-- The full n8n workflow execution behind the scenes  
-   
+Shows:
+
+- User interacting with the Telegram bot
+- Prompt submission
+- Image generation and delivery
+
+
+### ⚙️ n8n Workflow
+
+https://github.com/user-attachments/assets/5bdd600b-fb18-446b-9f57-38d320bfdd2f
+
+Shows:
+
+- Complete workflow execution
+- AI processing pipeline
+- Backend automation
+
 ---
 
 ## 🚀 Overview  
